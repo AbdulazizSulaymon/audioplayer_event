@@ -7,14 +7,28 @@ export default function Home() {
   const sounds = [
     "https://ringon.site/?do=get-file&id=5673",
     "https://ringon.site/?do=get-file&id=47528",
+    "https://ringon.site/?do=get-file&id=47611",
   ];
 
   const [sound1, setSound1] = useState(null);
   const [sound2, setSound2] = useState(null);
+  const [number, setNumber] = useState(0);
 
   const next = () => {
-    if (!sound1) setSound1(sounds[0]);
-    if (sound1 && !sound2) setSound2(sounds[1]);
+    if (number == 0) setSound1(sounds[0]);
+    else if (number == 1) setSound2(sounds[1]);
+    else if (number == 2) {
+      setSound1(sounds[1]);
+      setSound2(sounds[2]);
+    } else if (number == 3) {
+      console.log("null");
+      setSound1(null);
+      setSound2(null);
+      setNumber(0);
+      return 0;
+    }
+
+    setNumber(number + 1);
   };
 
   return (
