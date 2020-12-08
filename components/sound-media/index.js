@@ -2,21 +2,19 @@ import { createRef, useEffect, useState } from "react";
 import ReactAudioPlayer from "react-audio-player";
 
 const SoundMedia = (props) => {
-  const { sound1, sound2 } = props;
+  const { sound1, sound2, secund } = props;
 
   const [currentSound1, setCurrentSound1] = useState(null);
   const [currentSound2, setCurrentSound2] = useState(null);
   const [oldSoundGot, setOldSoundGot] = useState(false);
   useEffect(() => {
-    if (!currentSound1) setCurrentSound1(sound1);
-    if (!currentSound2) setCurrentSound2(sound2);
+    setCurrentSound1(sound1);
+    setCurrentSound2(sound2);
     if (currentSound1 && currentSound2 && currentSound2 == sound1) {
       setOldSoundGot(true);
       setCurrentSound1(sound2);
       setCurrentSound2(sound1);
-      console.log("setOldSoundGot true");
     } else setOldSoundGot(false);
-    console.log(123);
   }, [sound1, sound2]);
 
   const [vol1, setVol1] = useState(1);
@@ -29,10 +27,10 @@ const SoundMedia = (props) => {
   const maxStep = 100;
   const [step, setStep] = useState(0);
   const [play, setPlay] = useState(false);
-  const secund = 2;
   const delay = (secund * 1000) / maxStep;
 
   useEffect(() => {
+    setPlay(0);
     if (sound1 && sound2) setPlay(true);
     else {
       setVol1(1);
@@ -69,7 +67,8 @@ const SoundMedia = (props) => {
     setStep(step + 1);
   };
 
-  console.log(vol1, vol2, step);
+  //   console.log(vol1, vol2, step);
+  console.log(sound1, sound2);
 
   return (
     <div>
