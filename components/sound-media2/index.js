@@ -17,34 +17,42 @@ const SoundMedia = (props) => {
   const [new2, setNew2] = useState(false);
 
   useEffect(() => {
-    if (sound1 != currentSound1) setNew1(true);
+    if (sound1 != currentSound1 || !sound2) setNew1(true);
     else setNew1(false);
-    if (currentSound1 && currentSound2 && currentSound2 == sound1)
+    if (
+      currentSound1 &&
+      currentSound2 &&
+      (currentSound2 == sound1 || currentSound1 == sound2)
+    )
       setNew2(false);
     else setNew2(true);
 
-    if (currentSound1 && currentSound2 && currentSound2 == sound1) {
+    if (
+      currentSound1 &&
+      currentSound2 &&
+      (currentSound2 == sound1 || currentSound1 == sound2)
+    ) {
       setOldSoundGot(true);
       setCurrentSound1(sound2);
       setCurrentSound2(sound1);
-      setCurFadein1(parseFloat(fadein2) || defaultSecond);
-      setCurFadein2(parseFloat(fadein1) || defaultSecond);
-      setCurFadeout1(parseFloat(fadeout2) || defaultSecond);
-      setCurFadeout2(parseFloat(fadeout1) || defaultSecond);
+      setCurFadein1(fadein2 || defaultSecond);
+      setCurFadein2(fadein1 || defaultSecond);
+      setCurFadeout1(fadeout2 || defaultSecond);
+      setCurFadeout2(fadeout1 || defaultSecond);
       console.log("<---");
     } else {
       setOldSoundGot(false);
       setCurrentSound1(sound1);
       setCurrentSound2(sound2);
-      setCurFadein1(parseFloat(fadein1) || defaultSecond);
-      setCurFadein2(parseFloat(fadein2) || defaultSecond);
-      setCurFadeout1(parseFloat(fadeout1) || defaultSecond);
-      setCurFadeout2(parseFloat(fadeout2) || defaultSecond);
+      setCurFadein1(fadein1 || defaultSecond);
+      setCurFadein2(fadein2 || defaultSecond);
+      setCurFadeout1(fadeout1 || defaultSecond);
+      setCurFadeout2(fadeout2 || defaultSecond);
       console.log("--->");
     }
   }, [sound1, sound2]);
 
-  console.log(curFadein1, curFadein2);
+  console.log(new1, new2);
 
   const [vol1, setVol1] = useState(1);
   const [vol2, setVol2] = useState(1);
